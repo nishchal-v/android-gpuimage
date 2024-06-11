@@ -1,6 +1,11 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id "com.vanniktech.maven.publish" version "0.28.0"
+    alias(libs.plugins.kotlinAndroid)
+}
 
 android {
+    namespace "jp.co.cyberagent.android.gpuimage"
     compileSdkVersion COMPILE_SDK_VERSION as int
 
     defaultConfig {
@@ -27,6 +32,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 ext {
@@ -49,8 +57,8 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 
-// TODO: Close JCenter on May 1st https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/
-// apply from: 'https://gist.githubusercontent.com/wasabeef/cf14805bee509baf7461974582f17d26/raw/bintray-v1.gradle'
-// apply from: 'https://gist.githubusercontent.com/wasabeef/cf14805bee509baf7461974582f17d26/raw/install-v1.gradle'
-
 apply from: 'https://gist.githubusercontent.com/wasabeef/2f2ae8d97b429e7d967128125dc47854/raw/maven-central-v1.gradle'
+
+dependencies {
+    implementation libs.core.ktx
+}
